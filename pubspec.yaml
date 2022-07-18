@@ -17,6 +17,7 @@ dependencies:
   html: ^0.15.0
   http: ^0.13.4
   shared_preferences: ^2.0.15
+  localstorage: ^4.0.0+1
   string_validator: ^0.3.0
   url_launcher: ^6.1.4
 

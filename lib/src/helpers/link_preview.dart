@@ -248,12 +248,17 @@ class AnyLinkPreviewState extends State<AnyLinkPreview> {
   }
 
   Future<void> _getInfo(String link) async {
+    final stopwatch = Stopwatch()..start();
+
     try {
       _info = await LinkAnalyzer.getInfo(link,
           cache: widget.cache, headers: widget.headers);
     } catch (error) {
       _info = null;
     }
+
+    print('_getInfo() executed in ${stopwatch.elapsed}');
+
     if (mounted) {
       setState(() {
         _loading = false;

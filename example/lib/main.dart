@@ -59,101 +59,216 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(title: Text('Any Link Preview')),
-        body: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              AnyLinkPreview(
-                link: _url1,
-                displayDirection: UIDirection.uiDirectionHorizontal,
-                cache: Duration(hours: 1),
-                backgroundColor: Colors.grey[300],
-                errorWidget: Container(
-                  color: Colors.grey[300],
-                  child: Text('Oops!'),
-                ),
-                errorImage: _errorImage,
-              ),
-              SizedBox(height: 25),
-              AnyLinkPreview(
-                link: _url2,
-                displayDirection: UIDirection.uiDirectionHorizontal,
-                showMultimedia: false,
-                bodyMaxLines: 5,
-                bodyTextOverflow: TextOverflow.ellipsis,
-                titleStyle: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 15,
-                ),
-                bodyStyle: TextStyle(color: Colors.grey, fontSize: 12),
-              ),
-              SizedBox(height: 25),
-              AnyLinkPreview(
-                displayDirection: UIDirection.uiDirectionHorizontal,
-                link: _url3,
-                errorBody: 'Show my custom error body',
-                errorTitle: 'Next one is youtube link, error title',
-              ),
-              SizedBox(height: 25),
-              AnyLinkPreview(link: _url4),
-              SizedBox(height: 25),
-              // Custom preview builder
-              AnyLinkPreview.builder(
-                link: _url5,
-                itemBuilder: (context, metadata, imageProvider) => Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    if (imageProvider != null)
-                      Container(
-                        constraints: BoxConstraints(
-                          maxHeight: MediaQuery.of(context).size.width * 0.5,
-                        ),
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: imageProvider,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-                    Container(
-                      width: double.infinity,
-                      color: Theme.of(context).primaryColor.withOpacity(0.6),
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 10, horizontal: 15),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          if (metadata.title != null)
-                            Text(
-                              metadata.title!,
-                              maxLines: 1,
-                              style:
-                                  const TextStyle(fontWeight: FontWeight.w500),
-                            ),
-                          const SizedBox(height: 5),
-                          if (metadata.desc != null)
-                            Text(
-                              metadata.desc!,
-                              maxLines: 1,
-                              style: Theme.of(context).textTheme.bodySmall,
-                            ),
-                          Text(
-                            metadata.url ?? _url5,
-                            maxLines: 1,
-                            style: Theme.of(context).textTheme.bodySmall,
-                          ),
+      home: Builder(
+        builder: (context) => Scaffold(
+          appBar: AppBar(title: Text('Any Link Preview')),
+          body: SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const LinkPreviewSliverList(
+                        urls: [
+                          'https://youtu.be/XqZsoesa55w',
+                          'https://youtu.be/kJQP7kiw5Fk',
+                          'https://youtu.be/F4tHL8reNCs',
+                          'https://youtu.be/JGwWNGJdvx8',
+                          'https://youtu.be/RgKAFK5djSk',
+                          'https://youtu.be/WRVsOCh907o',
+                          'https://youtu.be/WRVsOCh907o',
+                          'https://youtu.be/_nAu9D-8srA',
+                          'https://youtu.be/OPf0YbXqDm0',
+                          'https://youtu.be/hq3yfQnllfQ',
+                          'https://youtu.be/9bZkp7q19f0',
+                          'https://youtu.be/FzG4uDgje3M',
+                          'https://youtu.be/09R8_2nJtjg',
+                          'https://youtu.be/fRh_vgS2dFE',
+                          'https://youtu.be/CevxZvSJLk8',
+                          'https://youtu.be/hT_nvWreIhg',
+                          'https://youtu.be/lp-EO5I60KA',
+                          'https://youtu.be/e_04ZrNroTo',
+                          'https://youtu.be/0KSOMA3QBU0',
+                          'https://youtu.be/60ItHLz5WEA',
                         ],
                       ),
                     ),
-                  ],
+                  ),
+                  child: Text('Open sliver list view'),
                 ),
-              ),
-            ],
+
+                AnyLinkPreview(
+                  link: _url1,
+                  displayDirection: UIDirection.uiDirectionHorizontal,
+                  cache: Duration(hours: 1),
+                  backgroundColor: Colors.grey[300],
+                  errorWidget: Container(
+                    color: Colors.grey[300],
+                    child: Text('Oops!'),
+                  ),
+                  errorImage: _errorImage,
+                ),
+                SizedBox(height: 25),
+                AnyLinkPreview(
+                  link: _url2,
+                  displayDirection: UIDirection.uiDirectionHorizontal,
+                  showMultimedia: false,
+                  bodyMaxLines: 5,
+                  bodyTextOverflow: TextOverflow.ellipsis,
+                  titleStyle: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15,
+                  ),
+                  bodyStyle: TextStyle(color: Colors.grey, fontSize: 12),
+                ),
+                SizedBox(height: 25),
+                AnyLinkPreview(
+                  displayDirection: UIDirection.uiDirectionHorizontal,
+                  link: _url3,
+                  errorBody: 'Show my custom error body',
+                  errorTitle: 'Next one is youtube link, error title',
+                ),
+                SizedBox(height: 25),
+                AnyLinkPreview(link: _url4),
+                SizedBox(height: 25),
+                // Custom preview builder
+                AnyLinkPreview.builder(
+                  link: _url5,
+                  itemBuilder: (context, metadata, imageProvider) => Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      if (imageProvider != null)
+                        Container(
+                          constraints: BoxConstraints(
+                            maxHeight: MediaQuery.of(context).size.width * 0.5,
+                          ),
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: imageProvider,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                      Container(
+                        width: double.infinity,
+                        color: Theme.of(context).primaryColor.withOpacity(0.6),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 10, horizontal: 15),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            if (metadata.title != null)
+                              Text(
+                                metadata.title!,
+                                maxLines: 1,
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.w500),
+                              ),
+                            const SizedBox(height: 5),
+                            if (metadata.desc != null)
+                              Text(
+                                metadata.desc!,
+                                maxLines: 1,
+                                style: Theme.of(context).textTheme.bodySmall,
+                              ),
+                            Text(
+                              metadata.url ?? _url5,
+                              maxLines: 1,
+                              style: Theme.of(context).textTheme.bodySmall,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class LinkPreviewSliverList extends StatelessWidget {
+  const LinkPreviewSliverList({Key? key, required this.urls}) : super(key: key);
+
+  final List<String> urls;
+
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Top 20 most watched YouTube videos (July 2022)'),
+        ),
+        body: CustomScrollView(
+          slivers: [
+            SliverList(
+              delegate: SliverChildBuilderDelegate(
+                (BuildContext context, int index) => Padding(
+                  padding: const EdgeInsets.only(bottom: 20),
+                  child: AnyLinkPreview.builder(
+                    link: urls[index],
+                    itemBuilder: (context, metadata, imageProvider) => Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        if (imageProvider != null)
+                          Container(
+                            constraints: BoxConstraints(
+                              maxHeight:
+                                  MediaQuery.of(context).size.width * 0.5,
+                            ),
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: imageProvider,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                        Container(
+                          width: double.infinity,
+                          color:
+                              Theme.of(context).primaryColor.withOpacity(0.6),
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 15),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              if (metadata.title != null)
+                                Text(
+                                  metadata.title!,
+                                  maxLines: 1,
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.w500),
+                                ),
+                              const SizedBox(height: 5),
+                              if (metadata.desc != null)
+                                Text(
+                                  metadata.desc!,
+                                  maxLines: 1,
+                                  style: Theme.of(context).textTheme.bodySmall,
+                                ),
+                              Text(
+                                metadata.url ?? urls[index],
+                                maxLines: 1,
+                                style: Theme.of(context).textTheme.bodySmall,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                childCount: urls.length,
+              ),
+            ),
+          ],
         ),
       ),
     );
